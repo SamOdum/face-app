@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route, Link, Switch} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 // import SearchForm from './SearchForm'
 // import ImageContainer from './ImageContainer'
 // import LoginForm from './LoginForm'

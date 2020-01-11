@@ -1,12 +1,20 @@
 $pri-text-color: #ffc;
 $accent-A: #04c8de;
 $accent-B: #ff5edf;
-$base-transition: all ease 0.3s;
+$base-transition: all ease 0.4s;
 $base-transform: scale(0.9);
+$heading-text-size: 1.4rem;
+$heading-ptext-size: 1.2rem;
+$button-text-size: 0.85rem;
 
 * {
 	margin: 0;
 	padding: 0;
+}
+
+a {
+	color: $pri-text-color;
+	text-decoration: none;
 }
 
 body {
@@ -41,7 +49,12 @@ body {
 
 	&-logo {
 		font-size: 110%;
-		pointer-events: none;
+		font-weight: 800;
+
+		&:hover {
+			transition: $base-transition;
+			transform: $base-transform;
+		}
 	}
 
 	&-navbar {
@@ -71,34 +84,117 @@ body {
 			display: flex;
 			flex-direction: column;
 			justify-content: flex-start;
+		}
+	}
 
-			& h1 {
-				text-align: center;
-				font-size: 120%;
+	&-heading-text {
+		text-align: center;
+		font-size: $heading-text-size;
+	}
+
+	&-heading-ptext {
+		text-align: center;
+		padding-top: 5%;
+		font-size: $heading-ptext-size;
+
+		@media screen and (max-width: 400px) {
+			padding-top: 10%;
+		}
+	}
+
+	&-form-container {
+		height: 90%;
+		width: 40%;
+		margin: auto;
+		padding-top: 4%;
+		background-color: wheat;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		@media screen and (max-width: 400px) {
+			width: 90%;
+			padding-top: 10%;
+		}
+	}
+
+	&-form-nav {
+		text-align: center;
+		padding-top: 4%;
+		padding-bottom: 5%;
+
+		font-size: $button-text-size;
+
+		@media screen and (max-width: 400px) {
+			padding-top: 8%;
+			padding-bottom: 10%;
+		}
+
+		& ul {
+			list-style-type: none;
+			display: flex;
+			justify-content: center;
+
+			& li {
+				border-bottom: 2px solid black;
+				padding-right: 4%;
+				padding-left: 4%;
+				min-width: auto;
+				text-transform: uppercase;
+				transition: $base-transition;
 			}
 
-			& p {
-				text-align: center;
-				padding-top: 5%;
-				font-size: 110%;
+			// & li:hover {
+			// 	transform: $base-transform;
+			// }
+		}
+	}
+	.active {
+		border-bottom: 4px solid black;
+	}
 
-				@media screen and (max-width: 400px) {
-					padding-top: 10%;
-				}
+	&-homepage-form {
+		width: 90%;
+		margin-right: auto;
+		margin-left: auto;
+		background-color: brown;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+
+		& input,
+		& button {
+			display: block;
+			padding: 3%;
+			padding-left: 5%;
+			margin-bottom: 5%;
+			border-radius: 1px;
+			border: none;
+
+			@media screen and (max-width: 400px) {
+				// padding-top: 10%;
+				margin-bottom: 10%;
 			}
 		}
 
-		&-form-container {
-			height: 90%;
-			width: 40%;
-			margin: auto;
-			background-color: wheat;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
+		& button {
+			font-size: $button-text-size;
+			padding-left: 0;
+			text-transform: uppercase;
+			color: $pri-text-color;
+			background: linear-gradient(
+				89deg,
+				$accent-B 0%,
+				$accent-A 100%
+			); /* w3c */
+			transition: $base-transition;
 
-			@media screen and (max-width: 400px) {
-				width: 90%;
+			&:hover {
+				background: linear-gradient(
+					89deg,
+					$accent-A 0%,
+					$accent-B 100%
+				); /* w3c */
 			}
 		}
 	}
