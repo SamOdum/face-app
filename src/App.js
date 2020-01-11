@@ -1,14 +1,19 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter as Router} from 'react-router-dom'
+import './App.scss';
 import Header from './components/Header';
 import Main from './components/Main';
 
-function App() {
+function App(props) {
   return (
-    <div className="App">
-       <Header />
-       <Main />
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <Main>
+          {props.children}
+        </Main>
+      </div>
+    </Router>
   );
 }
 
