@@ -7,7 +7,7 @@ function IndexFormContainer() {
     return (
         <Router>
             <div className='App-form-container'>
-                <h2 className='App-heading-text'>Welcome</h2>
+                <h2 className='App-heading-text Accent-B'>Welcome</h2>
                 <nav className='App-form-nav'>
                     <ul>
                         <li><NavLink to='/register'>Register</NavLink></li>

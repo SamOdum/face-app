@@ -10,11 +10,16 @@ $button-text-size: 0.85rem;
 * {
 	margin: 0;
 	padding: 0;
+	transition: all 2s;
 }
 
 a {
 	color: $pri-text-color;
 	text-decoration: none;
+}
+
+.Accent-B {
+	color: $accent-B;
 }
 
 body {
@@ -25,7 +30,8 @@ body {
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background: linear-gradient(89deg, $accent-A 0%, $accent-B 100%); /* w3c */
+	background: linear-gradient(89deg, $accent-A 0%, $accent-B 100%);
+	/* w3c */
 	color: $pri-text-color;
 	min-height: 100vh;
 }
@@ -67,6 +73,10 @@ body {
 
 		& ul {
 			list-style-type: none;
+
+			& li {
+				border-bottom: 4px solid $accent-A;
+			}
 		}
 	}
 
@@ -74,7 +84,7 @@ body {
 		margin-bottom: 4vh;
 		/* max-width: 50vw; */
 		height: 70vh;
-		background-color: blue;
+		// background-color: blue;
 		display: flex;
 
 		&-welcome {
@@ -107,7 +117,7 @@ body {
 		width: 40%;
 		margin: auto;
 		padding-top: 4%;
-		background-color: wheat;
+		background-color: $pri-text-color;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
@@ -136,28 +146,29 @@ body {
 			justify-content: center;
 
 			& li {
-				border-bottom: 2px solid black;
+				border-bottom: 2px solid $accent-B;
 				padding-right: 4%;
 				padding-left: 4%;
-				min-width: auto;
+				width: auto;
 				text-transform: uppercase;
 				transition: $base-transition;
 			}
 
-			// & li:hover {
-			// 	transform: $base-transform;
-			// }
+			& li a {
+				color: $accent-B;
+			}
 		}
 	}
+
 	.active {
-		border-bottom: 4px solid black;
+		border-bottom: 4px solid $accent-A;
 	}
 
 	&-homepage-form {
 		width: 90%;
 		margin-right: auto;
 		margin-left: auto;
-		background-color: brown;
+		// background-color: brown;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-evenly;
@@ -168,7 +179,7 @@ body {
 			padding: 3%;
 			padding-left: 5%;
 			margin-bottom: 5%;
-			border-radius: 1px;
+			border-radius: 2px;
 			border: none;
 
 			@media screen and (max-width: 400px) {
@@ -177,25 +188,102 @@ body {
 			}
 		}
 
+		& input {
+			border: 1px solid $accent-B;
+			// background-color: #ffd;
+		}
+
 		& button {
 			font-size: $button-text-size;
 			padding-left: 0;
 			text-transform: uppercase;
 			color: $pri-text-color;
-			background: linear-gradient(
-				89deg,
-				$accent-B 0%,
-				$accent-A 100%
-			); /* w3c */
+			background: $accent-B;
 			transition: $base-transition;
 
 			&:hover {
-				background: linear-gradient(
-					89deg,
-					$accent-A 0%,
-					$accent-B 100%
-				); /* w3c */
+				background: $accent-A;
 			}
+		}
+	}
+
+	&-form-link {
+		color: $accent-B;
+		font-size: $button-text-size;
+		text-align: center;
+	}
+
+	&-search-section {
+		height: 90%;
+		width: 45%;
+		margin: auto;
+		background-color: $pri-text-color;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		@media screen and (max-width: 400px) {
+			width: 90%;
+			padding-top: 10%;
+		}
+
+		&-infobar p {
+			text-align: center;
+			padding-top: 4%;
+			padding-bottom: 4%;
+			color: $accent-B;
+			font-size: $button-text-size;
+
+			@media screen and (max-width: 400px) {
+				padding-top: 3%;
+				padding-bottom: 10%;
+			}
+		}
+
+		&-form {
+			/* padding: 2vh; */
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+
+			& input,
+			& button {
+				display: block;
+				padding: 2.4%;
+				padding-left: 5%;
+				margin-bottom: 5%;
+				border-radius: 2px;
+				border: none;
+
+				@media screen and (max-width: 400px) {
+					// padding-top: 10%;
+					margin-bottom: 10%;
+				}
+			}
+
+			& input {
+				border: 1px solid $accent-B;
+				// background-color: #ffd;
+			}
+
+			& button {
+				font-size: $button-text-size;
+				padding-left: 2.4%;
+				text-transform: uppercase;
+				color: $pri-text-color;
+				background: $accent-B;
+				transition: $base-transition;
+
+				&:hover {
+					background: $accent-A;
+				}
+			}
+		}
+
+		&-img-container {
+			border: 1px solid $accent-B;
+			color: $accent-B;
+			height: 60%;
 		}
 	}
 }
@@ -205,31 +293,6 @@ body {
 		animation: App-logo-spin infinite 20s linear;
 	}
 } */
-
-// .App-infobar {
-// 	text-align: center;
-// 	margin: 0;
-// 	padding: 0;
-// }
-// .App-infobar p {
-// 	text-align: center;
-// 	margin: 0;
-// 	padding: 1.5vh;
-// }
-
-// .App-search-form {
-// 	/* padding: 2vh; */
-// 	display: flex;
-// 	flex-direction: row;
-// 	justify-content: center;
-// }
-
-// .App-mid-section {
-// 	height: 20vh;
-// 	display: flex;
-// 	flex-direction: column;
-// 	/* justify-content: space-around; */
-// }
 
 // .App-img-container {
 // 	background-color: red;

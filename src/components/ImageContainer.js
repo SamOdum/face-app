@@ -2,8 +2,8 @@ import React from 'react'
 
 function ImageContainer() {
     return (
-        <section className='App-img-container'>
-            lolo
+        <section className='App-search-section-img-container'>
+            image
         </section>
     )
 }
