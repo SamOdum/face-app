@@ -415,20 +415,21 @@ div.modal-form-inputs {
 			background: #1e82b9;
 		}
 	}
-}
 
-.button:disabled {
-	color: white;
-	border-color: gray;
-	background-color: gray;
+	&:disabled {
+		color: white;
+		border-color: gray;
+		background-color: gray;
+	}
 }
 
 .form-action {
 	padding-top: 20px;
-}
-.form-action .button:nth-child(2) {
-	margin-right: 10px;
-	font-family: 'Open Sans', sans-serif;
+
+	& .button:nth-child(2) {
+		margin-right: 10px;
+		font-family: 'Open Sans', sans-serif;
+	}
 }
 
 .clearfix:before,
@@ -443,5 +444,4 @@ div.modal-form-inputs {
 .pull-right {
 	float: right !important;
 }
-
-/*******  MODAL  *******/
+/*	******  MODAL  *******/
