@@ -370,17 +370,17 @@ div.modal-form-inputs {
 	overflow-y: scroll;
 	overflow: auto;
 	margin-top: -10px;
-}
 
-div.modal-form-inputs input[type='text'] {
-	height: auto;
-	padding: 5px;
-	width: 95%;
-}
+	& input[type='text'] {
+		height: auto;
+		padding: 5px;
+		width: 95%;
+	}
 
-div.modal-form-inputs label {
-	margin-top: 5px;
-	font-weight: lighter;
+	& label {
+		margin-top: 5px;
+		font-weight: lighter;
+	}
 }
 
 .button {
@@ -395,23 +395,26 @@ div.modal-form-inputs label {
 	border-radius: 4px;
 	transition: background 0.4s ease;
 	font-size: 14px;
-}
 
-.button-default {
-	background: transparent;
-	border-color: #ddd;
-	color: #666666;
-}
-.button-default:hover {
-	border-color: #ccc;
-	color: #333;
-}
-.button-primary {
-	background: #0192dd;
-	color: #fff;
-}
-.button-primary:hover {
-	background: #1e82b9;
+	&-default {
+		background: transparent;
+		border-color: #ddd;
+		color: #666666;
+
+		&:hover {
+			border-color: #ccc;
+			color: #333;
+		}
+	}
+
+	&-primary {
+		background: #0192dd;
+		color: #fff;
+
+		&:hover {
+			background: #1e82b9;
+		}
+	}
 }
 
 .button:disabled {
