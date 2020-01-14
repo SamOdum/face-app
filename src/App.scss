@@ -1,6 +1,8 @@
 $pri-text-color: #ffc;
 $accent-A: #04c8de;
 $accent-B: #ff5edf;
+$black-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+$darker-black-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
 $base-transition: all ease 0.4s;
 $base-transform: scale(0.9);
 $heading-text-size: 1.4rem;
@@ -36,307 +38,277 @@ body {
 	min-height: 100vh;
 }
 
-.App {
-	width: 80vw;
-	height: 100vh;
-	margin-left: auto;
-	margin-right: auto;
-	font-size: calc(10px + 2vmin);
+// .App {
+// 	width: 80vw;
+// 	height: 100vh;
+// 	margin-left: auto;
+// 	margin-right: auto;
+// 	font-size: calc(10px + 2vmin);
+// 	display: flex;
+// 	flex-direction: column;
+// 	justify-content: space-between;
+// }
+
+/******  LOGIN PAGE  ******/
+.login-container {
 	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+	align-items: center;
+	background-image: url('./assets/carry-on-colour.svg');
+	height: calc(100vh - 70px);
+	background-repeat: no-repeat;
+	background-position: right;
+	padding-left: 5%;
+	padding-right: 5%;
+	margin-top: 70px;
 
-	&-header {
-		margin-top: 2vh;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-
-	&-logo {
-		font-size: 110%;
-		font-weight: 800;
-
-		&:hover {
-			transition: $base-transition;
-			transform: $base-transform;
-		}
-	}
-
-	&-navbar {
-		color: $pri-text-color;
-		transition: $base-transition;
-
-		&:hover {
-			transform: $base-transform;
-		}
-
-		& ul {
-			list-style-type: none;
-
-			& li {
-				border-bottom: 4px solid $accent-A;
-			}
-		}
-	}
-
-	&-main {
-		margin-bottom: 4vh;
-		/* max-width: 50vw; */
-		height: 70vh;
-		// background-color: blue;
-		display: flex;
-
-		&-welcome {
-			width: 90%;
-			margin-left: auto;
-			margin-right: auto;
-			display: flex;
-			flex-direction: column;
-			justify-content: flex-start;
-		}
-	}
-
-	&-heading-text {
-		text-align: center;
-		font-size: $heading-text-size;
-	}
-
-	&-heading-ptext {
-		text-align: center;
-		padding-top: 5%;
-		font-size: $heading-ptext-size;
-
-		@media screen and (max-width: 400px) {
-			padding-top: 10%;
-		}
-	}
-
-	&-form-container {
-		height: 90%;
-		width: 40%;
-		margin: auto;
-		padding-top: 4%;
-		background-color: $pri-text-color;
-		flex-direction: column;
-		align-items: center;
+	@media screen and (max-width: 700px) {
 		justify-content: center;
-
-		@media screen and (max-width: 400px) {
-			width: 90%;
-			padding-top: 10%;
-		}
+		background-image: none;
 	}
 
-	&-form-nav {
-		text-align: center;
-		padding-top: 4%;
-		padding-bottom: 5%;
-
-		font-size: $button-text-size;
-
-		@media screen and (max-width: 400px) {
-			padding-top: 8%;
-			padding-bottom: 10%;
-		}
-
-		& ul {
-			list-style-type: none;
-			display: flex;
-			justify-content: center;
-
-			& li {
-				border-bottom: 2px solid $accent-B;
-				padding-right: 4%;
-				padding-left: 4%;
-				width: auto;
-				text-transform: uppercase;
-				transition: $base-transition;
-			}
-
-			& li a {
-				color: $accent-B;
-			}
-		}
-	}
-
-	.active {
-		border-bottom: 4px solid $accent-A;
-	}
-
-	&-homepage-form {
-		width: 90%;
-		margin-right: auto;
-		margin-left: auto;
-		// background-color: brown;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-evenly;
-
-		& input,
-		& button {
-			display: block;
-			padding: 3%;
-			padding-left: 5%;
-			margin-bottom: 5%;
-			border-radius: 2px;
-			border: none;
-
-			@media screen and (max-width: 400px) {
-				// padding-top: 10%;
-				margin-bottom: 10%;
-			}
-		}
-
-		& input {
-			border: 1px solid $accent-B;
-			// background-color: #ffd;
-		}
-
-		& button {
-			font-size: $button-text-size;
-			padding-left: 0;
-			text-transform: uppercase;
-			color: $pri-text-color;
-			background: $accent-B;
-			transition: $base-transition;
-
-			&:hover {
-				background: $accent-A;
-			}
-		}
-	}
-
-	&-form-link {
-		color: $accent-B;
-		font-size: $button-text-size;
-		text-align: center;
-	}
-
-	&-search-section {
-		height: 90%;
+	.card {
+		/* Add shadows to create the "card" effect */
+		box-shadow: $black-shadow;
+		transition: 0.3s;
+		height: 70%;
 		width: 45%;
-		margin: auto;
-		background-color: $pri-text-color;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
 
-		@media screen and (max-width: 400px) {
-			width: 90%;
-			padding-top: 10%;
+		@media screen and (max-width: 700px) {
+			width: 80%;
+			align-self: center;
 		}
 
-		&-infobar p {
-			text-align: center;
-			padding-top: 4%;
-			padding-bottom: 4%;
-			color: $accent-B;
-			font-size: $button-text-size;
-
-			@media screen and (max-width: 400px) {
-				padding-top: 3%;
-				padding-bottom: 10%;
-			}
+		@media screen and (max-width: 350px) {
+			width: 100%;
 		}
 
-		&-form {
-			/* padding: 2vh; */
+		/* On mouse-over, add a deeper shadow */
+		&:hover {
+			box-shadow: 0$black-shadow;
+		}
+	}
+
+	/* Add some padding inside the card container */
+	& .container {
+		padding-left: 7%;
+		padding-right: 7%;
+		height: 100%;
+
+		& h1 {
+			font-size: 2.5rem;
+		}
+
+		& form {
 			display: flex;
-			flex-direction: row;
-			justify-content: center;
+			height: 80%;
+			flex-direction: column;
+			justify-content: space-around;
+			align-self: center;
+		}
+	}
 
-			& input,
-			& button {
-				display: block;
-				padding: 2.4%;
-				padding-left: 5%;
-				margin-bottom: 5%;
-				border-radius: 2px;
-				border: none;
+	& button {
+		height: 40px;
+		font-weight: bold;
+		font-size: 15px;
+		background-color: $accent-B;
+		color: $pri-text-color;
 
-				@media screen and (max-width: 400px) {
-					// padding-top: 10%;
-					margin-bottom: 10%;
-				}
-			}
-
-			& input {
-				border: 1px solid $accent-B;
-				// background-color: #ffd;
-			}
-
-			& button {
-				font-size: $button-text-size;
-				padding-left: 2.4%;
-				text-transform: uppercase;
-				color: $pri-text-color;
-				background: $accent-B;
-				transition: $base-transition;
-
-				&:hover {
-					background: $accent-A;
-				}
-			}
+		&:hover {
+			background-color: rgb(151, 25, 46);
+			cursor: pointer;
 		}
 
-		&-img-container {
-			border: 1px solid $accent-B;
-			color: $accent-B;
-			height: 60%;
+		&:focus {
+			outline: none !important;
 		}
 	}
 }
 
-/* @media (prefers-reduced-motion: no-preference) {
-	.App-logo {
-		animation: App-logo-spin infinite 20s linear;
+input[type='text'],
+input[type='password'] {
+	padding-left: 1px;
+	padding-right: 1px;
+	height: 40px;
+	border-radius: 5px;
+	border: 0.5px solid rgb(143, 143, 143);
+	font-size: 15px;
+}
+
+label {
+	display: flex;
+	flex-direction: column;
+}
+
+.spinner {
+	animation: spinner infinite 0.9s linear;
+	height: 90%;
+
+	&:focus {
+		border: none;
 	}
-} */
+}
 
-// .App-img-container {
-// 	background-color: red;
-// 	height: 80vh;
-// 	width: 100%;
-// }
+@keyframes spinner {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
 
-// .App-search-form input {
-// 	padding: 0.5%;
-// 	width: 40%;
-// 	/* justify-self: stretch; */
-// }
+.form-error {
+	color: #f42b4b;
+	text-align: center;
+}
+/*	*****  LOGIN PAGE  ******/
 
-// .App-search-form button {
-// 	padding: 0.5% 1.5%;
-// }
+/******  HEADER  ******/
 
-// .App-login-form {
-// 	width: 50%;
-// 	display: flex;
-// 	flex-direction: column;
-// 	justify-content: stretch;
-// 	align-self: center;
-// }
+#navigation {
+	width: 100%;
+	position: fixed;
+	z-index: 10;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	background-color: $accent-B;
+	box-shadow: $black-shadow;
+	height: 70px;
+	top: 0;
+	padding-right: 5px;
+	padding-left: 5px;
 
-// /* .App-login-form input {
-// 	padding: 0.5%;
-// 	width: 40%;
-// 	justify-self: stretch;
-// }
+	& h1 {
+		color: $pri-text-color;
+	}
 
-// .App-login-form button {
-// 	padding: 0.5% 1.5%;
-// } */
+	& button {
+		background-color: transparent;
+		border: none;
+		align-self: center;
 
-// .App-link {
-// 	color: #61dafb;
-// }
+		&:hover {
+			cursor: pointer;
+		}
 
-// @keyframes App-logo-spin {
-// 	from {
-// 		transform: rotate(0deg);
-// 	}
-// 	to {
-// 		transform: rotate(360deg);
-// 	}
-// }
+		&:focus {
+			outline: none !important;
+		}
+	}
+}
+/*	*****  HEADER  ******/
+
+/******  HOME PAGE  ******/
+.home,
+.toggle-button {
+	margin-top: 100px;
+	margin-left: 2%;
+	margin-right: 2%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.toggle-button {
+	width: 200px;
+	text-align: center;
+	justify-content: center;
+	height: 50px;
+	border: none;
+	background-color: $accent-B;
+	color: $pri-text-color;
+	font-size: 14px;
+	font-weight: bold;
+
+	@media screen and (min-width: 1400px) {
+		margin-bottom: 10px;
+	}
+
+	&:hover {
+		cursor: pointer;
+		background-color: rgb(189, 1, 32);
+	}
+}
+
+.home {
+	@media screen and (max-width: 780px) {
+		justify-content: space-around;
+	}
+
+	@media screen and (min-width: 1400px) {
+		margin: auto;
+		width: 1400px;
+	}
+
+	&.loader {
+		align-self: center;
+		width: 100%;
+		text-align: center;
+	}
+
+	&.error {
+		width: 100%;
+		align-self: center;
+		color: $accent-B;
+		font-size: 30px;
+		font-weight: bold;
+		text-align: center;
+	}
+
+	& > .card {
+		/* Add shadows to create the "card" effect */
+		box-shadow: $black-shadow;
+		transition: 0.3s;
+		height: 400px;
+		width: 30%;
+		position: relative;
+		margin-bottom: 2%;
+
+		/* On mouse-over, add a deeper shadow */
+		&:hover {
+			box-shadow: $darker-black-shadow;
+		}
+
+		& > img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	&.card {
+		@media screen and (max-width: 780px) {
+			width: 45%;
+		}
+		@media screen and (max-width: 500px) {
+			width: 90%;
+		}
+	}
+}
+
+.home .card .home .content {
+	bottom: 0;
+	z-index: 9;
+	position: absolute;
+	background-color: rgba(255, 255, 255, 0.7);
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	align-items: center;
+	height: 35%;
+	padding-bottom: 5px;
+	transition: 0.5s;
+}
+
+.home .content:hover {
+	background-color: rgba(255, 255, 255, 1);
+	height: 50%;
+	cursor: pointer;
+}
+
+.content > h2 {
+	text-align: center;
+	font-size: 2rem;
+}
+/*	*****  HOME PAGE  ******/
