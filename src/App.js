@@ -1,17 +1,67 @@
-import React from 'react';
-import { BrowserRouter as Router} from 'react-router-dom'
-import './App.scss';
-import Main from './components/Main';
-import Header from './components/Header'
+import React, { createContext, useEffect, useReducer } from "react";
+import "./App.scss";
+import Login from "./components/Login";
+import Home from "./components/Home";
+import Header from "./components/Header";
 
-function App(props) {
+export const AuthContext = createContext();
+
+const initialState = {
+  isAuthenticated: false,
+  user: null,
+  token: null,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "LOGIN":
+      localStorage.setItem("user", JSON.stringify(action.payload.user));
+      localStorage.setItem("token", JSON.stringify(action.payload.token));
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload.user,
+        token: action.payload.token
+      };
+    case "LOGOUT":
+      localStorage.clear();
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: null
+      };
+    default:
+      return state;
+  }
+};
+
+function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'))
+    const token = JSON.parse(localStorage.getItem('token'))
+
+    if(user && token){
+      dispatch({
+        type: 'LOGIN',
+        payload: {
+          user,
+          token
+        }
+      })
+    }
+  }, [])
   return (
-    <Router>
-      <div className="App">
-        <Header />
-        <Main />
-      </div>
-    </Router>
+    <AuthContext.Provider
+      value={{
+        state,
+        dispatch
+      }}
+    >
+      <Header />
+      <div className="App">{!state.isAuthenticated ? <Login /> : <Home />}</div>
+    </AuthContext.Provider>
   );
 }
 
