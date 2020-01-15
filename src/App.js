@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useReducer } from "react";
+import { BrowserRouter as Router } from 'react-router-dom';
 import "./App.scss";
 import Login from "./components/Login";
 import Home from "./components/Home";
@@ -59,8 +60,10 @@ function App() {
         dispatch
       }}
     >
-      <Header />
-      <div className="App">{!state.isAuthenticated ? <Login /> : <Home />}</div>
+      <Router>
+        <Header />
+        <div className="App">{!state.isAuthenticated ? <Login /> : <Home />}</div>
+      </Router>
     </AuthContext.Provider>
   );
 }

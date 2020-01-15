@@ -16,7 +16,7 @@ export const Header = () => {
         }
       >
         {state.isAuthenticated && (
-          <h1>Hi {state.user.firstName} (LOGOUT)</h1>
+          <h1 className='btn-txt'>Hi {state.user.firstName} (LOGOUT)</h1>
         )}
       </button>
     </nav>
