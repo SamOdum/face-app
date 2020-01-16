@@ -1,9 +1,16 @@
-import React from 'react';
+import React, {
+	Fragment,
+	createContext,
+	useEffect,
+	useContext,
+	useReducer,
+	useState,
+} from 'react';
 import { AuthContext } from '../App';
 // import Card from './Card';
 // import AddSong from './AddSong';
 
-export const SongContext = React.createContext();
+export const SongContext = createContext();
 
 const initialState = {
 	songs: [],
@@ -57,17 +64,15 @@ const reducer = (state, action) => {
 };
 
 export const Home = () => {
-	const { state: authState } = React.useContext(AuthContext);
-	const [state, dispatch] = React.useReducer(reducer, initialState);
-	const [isAddSongModalVisible, setAddSongModalVisibility] = React.useState(
-		false
-	);
+	const { state: authState } = useContext(AuthContext);
+	const [state, dispatch] = useReducer(reducer, initialState);
+	const [isAddSongModalVisible, setAddSongModalVisibility] = useState(false);
 
 	const toggleAddSong = () => {
 		setAddSongModalVisibility(!isAddSongModalVisible);
 	};
 
-	React.useEffect(() => {
+	useEffect(() => {
 		dispatch({
 			type: 'FETCH_SONGS_REQUEST',
 		});
@@ -99,7 +104,7 @@ export const Home = () => {
 	}, [authState.token]);
 
 	return (
-		<React.Fragment>
+		<Fragment>
 			<SongContext.Provider
 				value={{
 					state,
@@ -124,7 +129,7 @@ export const Home = () => {
 					</>
 				)}
 			</div>
-		</React.Fragment>
+		</Fragment>
 	);
 };
 
