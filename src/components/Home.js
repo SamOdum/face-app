@@ -1,7 +1,7 @@
 import React from 'react';
 import { AuthContext } from '../App';
-import Card from './Card';
-import AddSong from './AddSong';
+// import Card from './Card';
+// import AddSong from './AddSong';
 
 export const SongContext = React.createContext();
 
@@ -108,7 +108,7 @@ export const Home = () => {
 				<button className='toggle-button' onClick={toggleAddSong}>
 					ADD SONG
 				</button>
-				<AddSong onClose={toggleAddSong} show={isAddSongModalVisible} />
+				{/*<AddSong onClose={toggleAddSong} show={isAddSongModalVisible} />*/}
 			</SongContext.Provider>
 			<div className='home'>
 				{state.isFetching ? (
@@ -118,9 +118,9 @@ export const Home = () => {
 				) : (
 					<>
 						{state.songs.length > 0 &&
-							state.songs.map(song => (
-								<Card key={song.id.toString()} song={song} />
-							))}
+							state.songs.map(song => ({
+								/*<Card key={song.id.toString()} song={song} />*/
+							}))}
 					</>
 				)}
 			</div>

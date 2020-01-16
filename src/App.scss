@@ -104,7 +104,19 @@ body {
 			justify-content: space-between;
 
 			& a {
-				border-bottom: 4px solid $accent-B;
+				// border-bottom: 4px solid $accent-B;
+				position: relative;
+				&::after {
+					content: '';
+					display: block;
+					width: 0;
+					border-bottom: 4px solid $accent-B;
+					transition: $base-transition;
+				}
+
+				&:hover::after {
+					width: 100%;
+				}
 			}
 		}
 
@@ -127,6 +139,13 @@ body {
 		margin-top: 10%;
 		margin-bottom: 10%;
 
+		@media screen and (min-width: 700px) {
+			width: auto;
+			padding: 2% 5%;
+			margin-right: auto;
+			margin-left: auto;
+		}
+
 		&:hover {
 			background-color: $accent-A;
 			color: $pri-text-color;
@@ -139,9 +158,11 @@ body {
 	}
 }
 
-.active {
-	border-bottom: 4px solid $accent-B;
-}
+// .active {
+// 	// margin-top: -1px;
+// 	border-bottom: 4px solid $accent-B;
+// 	position: absolute;
+// }
 
 input[type='text'],
 input[type='password'] {
