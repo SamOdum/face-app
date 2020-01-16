@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useReducer } from 'react';
+import Particles from 'react-particles-js';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './App.scss';
 import Login from './components/Login';
@@ -36,6 +37,25 @@ const reducer = (state, action) => {
 	}
 };
 
+const particlesObject = {
+	particles: {
+		number: {
+			value: 50,
+		},
+		size: {
+			value: 3,
+		},
+	},
+	interactivity: {
+		events: {
+			onhover: {
+				enable: true,
+				mode: 'repulse',
+			},
+		},
+	},
+};
+
 function App() {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -59,6 +79,7 @@ function App() {
 				state,
 				dispatch,
 			}}>
+			<Particles params={particlesObject} className='particles' />
 			<Router>
 				<Header />
 				<div className='App'>
