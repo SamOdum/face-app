@@ -11,46 +11,42 @@ cloudinary.config({
   api_secret: process.env.API_SECRET,
 });
 
-const Employees = {
+const Users = {
   query: {
-    createQuery: `INSERT INTO
-  employees(firstname, lastname, email, password, gender, department, address, role, status, url, publicid)
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) returning *`,
+    createUser: `INSERT INTO
+  users( email, password1, password2)
+  VALUES ($1, $2, $3) returning *`,
     findUser: 'SELECT * FROM employees WHERE userid = $1',
     deleteUser: 'DELETE FROM employees WHERE userid = $1 returning *',
   },
 
   /**
-   * Create employee with picture
+   * Create User
    * @param {object} req
    * @param {object} res
-   * @returns {object} employee object
+   * @returns {object} User id and token
    */
   async create(req, res) {
-    const file = req.files[0].path;
+    const { password1, password2 } = req.body;
+    if(password1 !== password2 ) return res.status(400).send({ status: 'error', data: { message: 'passwords must match' } });
+      
+    const passwordHash = Helper.hashPassword(req.body.password);
+    const values = [req.body.email, passwordHash];
 
-    // **Upload file to Cloudinary then database
-    cloudinary.uploader.upload(file,
-      { folder: 'teamwork/users' },
-      async (error, result) => {
-        const passwordHash = Helper.hashPassword(req.body.password);
-        const values = [req.body.firstName, req.body.lastName, req.body.email, passwordHash, req.body.gender, req.body.department, req.body.address, req.body.role || 'basic', req.body.status, result.url, result.public_id];
-
-        try {
-          const { rows } = await db.query(Employees.query.createQuery, values);
-          const userId = rows[0].userid;
-          const token = Helper.generateToken(userId);
-          return res.status(201).json({
-            status: 'success', data: { message: 'User account successfully created', token, userId },
-          });
-        } catch (err) {
-          return res.status(400).send({ status: 'error', error: { message: err } });
-        }
+    try {
+      const { rows } = await db.query(Users.query.createUser, values);
+      const userId = rows[0].userid;
+      const token = Helper.generateToken(userId);
+      return res.status(201).json({
+        status: 'success', data: { message: 'User account successfully created', token, userId },
       });
+    } catch (err) {
+      return res.status(400).send({ status: 'error', error: { message: err } });
+    }
   },
 
   /**
-   * Delete An Employee
+   * Delete User
    * @param {object} req
    * @param {object} res
    * @returns {void} return status code 204
@@ -76,12 +72,12 @@ const Employees = {
   },
 
   /**
-   * Login An Employee
+   * Login User
    * @param {object} req
    * @param {object} res
    * @returns {object} user id and authentification token
    */
-  async signin(req, res) {
+  async login(req, res) {
     const { email, password } = req.body;
     if (!email || !password || (!Helper.isValidEmail(email))) {
       return res.status(400).send({ status: 'error', error: { message: 'Fill all fields and provide a valid email' } });
@@ -103,4 +99,4 @@ const Employees = {
   },
 };
 
-module.exports = Employees;
+module.exports = Users;
