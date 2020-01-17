@@ -79,7 +79,7 @@ const Employees = {
    * Login An Employee
    * @param {object} req
    * @param {object} res
-   * @returns {object} user object
+   * @returns {object} user id and authentification token
    */
   async signin(req, res) {
     const { email, password } = req.body;
