@@ -96,16 +96,7 @@ const Employees = {
         return res.status(400).send({ status: 'error', error: { message: 'The credentials you provided is incorrect' } });
       }
       const token = Helper.generateToken(rows[0].userid);
-      // return res.status(200).send({ status: 'success', data: { token, userId: rows[0].userid } });
-      return res.status(200).send({
-        success: true,
-        message: 'Authentication successful!',
-        token,
-        user: {
-          firstName: 'Admin',
-          lastName: 'User',
-        },
-      });
+      return res.status(200).send({ status: 'success', data: { token, userId: rows[0].userid } });
     } catch (error) {
       return res.status(400).send({ status: 'error', error });
     }
