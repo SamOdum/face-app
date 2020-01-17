@@ -14,37 +14,10 @@ cloudinary.config({
 const Employees = {
   query: {
     createQuery: `INSERT INTO
-  employees(firstname, lastname, email, password, gender, jobrole, department, address, role, url, publicid)
+  employees(firstname, lastname, email, password, gender, department, address, role, status, url, publicid)
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) returning *`,
     findUser: 'SELECT * FROM employees WHERE userid = $1',
     deleteUser: 'DELETE FROM employees WHERE userid = $1 returning *',
-  },
-  /**
-   * Create An Employee
-   * @param {object} req
-   * @param {object} res
-   * @returns {object} employee object
-   */
-  async createBare(req, res) {
-    const text = `INSERT INTO
-      employees(firstname, lastname, email, password, gender, jobrole, department, address, role)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *`;
-
-    // **Encrypt user's password
-    const passwordHash = Helper.hashPassword(req.body.password);
-
-    const values = [req.body.firstName, req.body.lastName, req.body.email, passwordHash, req.body.gender, req.body.jobRole, req.body.department, req.body.address, req.body.role || 'basic'];
-
-    try {
-      const { rows } = await db.query(text, values);
-      const userId = rows[0].userid;
-      const token = Helper.generateToken(userId);
-      return res.status(201).json({
-        status: 'success', data: { message: 'User account successfully created', token, userId },
-      });
-    } catch (error) {
-      return res.status(400).send({ status: 'error', error });
-    }
   },
 
   /**
@@ -61,7 +34,7 @@ const Employees = {
       { folder: 'teamwork/users' },
       async (error, result) => {
         const passwordHash = Helper.hashPassword(req.body.password);
-        const values = [req.body.firstName, req.body.lastName, req.body.email, passwordHash, req.body.gender, req.body.jobRole, req.body.department, req.body.address, req.body.role || 'basic', result.url, result.public_id];
+        const values = [req.body.firstName, req.body.lastName, req.body.email, passwordHash, req.body.gender, req.body.department, req.body.address, req.body.role || 'basic', req.body.status, result.url, result.public_id];
 
         try {
           const { rows } = await db.query(Employees.query.createQuery, values);
