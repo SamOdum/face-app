@@ -55,32 +55,6 @@ const Employees = {
    * @param {object} res
    * @returns {void} return status code 204
    */
-  async deleteBare(req, res) {
-    const { userId } = req.body;
-    const deleteQuery = 'DELETE FROM employees WHERE userid=$1';
-    const findQuery = 'SELECT * FROM employees WHERE userid=$1';
-    try {
-      const find = await db.query(findQuery, [userId]);
-      if (!find.rows[0]) {
-        return res.status(404).json({ status: 'error', error: { message: 'Employee record not found' } });
-      }
-
-      db.query(deleteQuery, [userId]);
-      // if (!rows[0]) {
-      //   return res.status(404).json({ status: 'error', message: 'Employee record not found' });
-      // }
-      return res.status(202).json({ status: 'success', data: { message: 'Employee deleted' } });
-    } catch (error) {
-      return res.status(400).send(error);
-    }
-  },
-
-  /**
-   * Delete An Employee
-   * @param {object} req
-   * @param {object} res
-   * @returns {void} return status code 204
-   */
   async delete(req, res) {
     const userId = req.body.userUniqueId;
     const findQuery = Employees.query.findUser;
