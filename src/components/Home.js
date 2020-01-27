@@ -13,50 +13,30 @@ import { AuthContext } from '../App';
 export const SongContext = createContext();
 
 const initialState = {
-	songs: [],
+	picture: [],
 	isFetching: false,
 	hasError: false,
-	isSongSubmitting: false,
-	songHasError: false,
 };
 
 const reducer = (state, action) => {
 	switch (action.type) {
-		case 'FETCH_SONGS_REQUEST':
+		case 'FETCH_FACE_REQUEST':
 			return {
 				...state,
 				isFetching: true,
 				hasError: false,
 			};
-		case 'FETCH_SONGS_SUCCESS':
+		case 'FETCH_FACE_SUCCESS':
 			return {
 				...state,
 				isFetching: false,
-				songs: action.payload,
+				picture: action.payload,
 			};
-		case 'FETCH_SONGS_FAILURE':
+		case 'FETCH_FACE_FAILURE':
 			return {
 				...state,
 				hasError: true,
 				isFetching: false,
-			};
-		case 'ADD_SONG_REQUEST':
-			return {
-				...state,
-				isSongSubmitting: true,
-				songHasError: false,
-			};
-		case 'ADD_SONG_SUCCESS':
-			return {
-				...state,
-				isSongSubmitting: false,
-				songs: [...state.songs, action.payload],
-			};
-		case 'ADD_SONG_FAILURE':
-			return {
-				...state,
-				isSongSubmitting: false,
-				songHasError: true,
 			};
 		default:
 			return state;
@@ -68,15 +48,16 @@ export const Home = () => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 	const [isAddSongModalVisible, setAddSongModalVisibility] = useState(false);
 
-	const toggleAddSong = () => {
-		setAddSongModalVisibility(!isAddSongModalVisible);
-	};
+	// const toggleAddSong = () => {
+	// 	setAddSongModalVisibility(!isAddSongModalVisible);
+	// };
 
 	useEffect(() => {
 		dispatch({
-			type: 'FETCH_SONGS_REQUEST',
+			type: 'FETCH_FACE_REQUEST',
 		});
 		fetch('https://hookedbe.herokuapp.com/api/songs', {
+			// MAKE CALL TO CLARIFY API HERE
 			headers: {
 				Authorization: `Bearer ${authState.token}`,
 			},
@@ -91,14 +72,14 @@ export const Home = () => {
 			.then(resJson => {
 				console.log(resJson);
 				dispatch({
-					type: 'FETCH_SONGS_SUCCESS',
+					type: 'FETCH_FACE_SUCCESS',
 					payload: resJson,
 				});
 			})
 			.catch(error => {
 				console.log(error);
 				dispatch({
-					type: 'FETCH_SONGS_FAILURE',
+					type: 'FETCH_FACE_FAILURE',
 				});
 			});
 	}, [authState.token]);
