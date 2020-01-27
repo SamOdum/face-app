@@ -1,10 +1,10 @@
 import React, {
-	Fragment,
+	// Fragment,
 	createContext,
 	useEffect,
 	useContext,
 	useReducer,
-	useState,
+	// useState,
 } from 'react';
 import { AuthContext } from '../App';
 // import Card from './Card';
@@ -46,7 +46,7 @@ const reducer = (state, action) => {
 export const Home = () => {
 	const { state: authState } = useContext(AuthContext);
 	const [state, dispatch] = useReducer(reducer, initialState);
-	const [isAddSongModalVisible, setAddSongModalVisibility] = useState(false);
+	// const [isAddSongModalVisible, setAddSongModalVisibility] = useState(false);
 
 	// const toggleAddSong = () => {
 	// 	setAddSongModalVisibility(!isAddSongModalVisible);
@@ -85,27 +85,15 @@ export const Home = () => {
 	}, [authState.token]);
 
 	return (
-		<Fragment>
-			{/*<SongContext.Provider
-				value={{
-					state,
-					dispatch,
-				}}>
-				<button className='toggle-button' onClick={toggleAddSong}>
-					ADD SONG
-				</button>
-				<AddSong onClose={toggleAddSong} show={isAddSongModalVisible} />
-			</SongContext.Provider>*/}
-			<div className='home'>
-				{state.isFetching ? (
-					<span className='loader'>LOADING...</span>
-				) : state.hasError ? (
-					<span className='error'>AN ERROR HAS OCCURED</span>
-				) : (
-					<h1>Welcome to home</h1>
-				)}
-			</div>
-		</Fragment>
+		<div className='home'>
+			{state.isFetching ? (
+				<span className='loader'>LOADING...</span>
+			) : state.hasError ? (
+				<span className='error'>AN ERROR HAS OCCURED</span>
+			) : (
+				<h1>Welcome home</h1>
+			)}
+		</div>
 	);
 };
 
