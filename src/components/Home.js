@@ -102,12 +102,7 @@ export const Home = () => {
 				) : state.hasError ? (
 					<span className='error'>AN ERROR HAS OCCURED</span>
 				) : (
-					<>
-						{state.songs.length > 0 &&
-							state.songs.map(song => ({
-								/*<Card key={song.id.toString()} song={song} />*/
-							}))}
-					</>
+					<h1>Welcome to home</h1>
 				)}
 			</div>
 		</Fragment>
