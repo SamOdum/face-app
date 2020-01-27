@@ -86,7 +86,7 @@ export const Home = () => {
 
 	return (
 		<Fragment>
-			<SongContext.Provider
+			{/*<SongContext.Provider
 				value={{
 					state,
 					dispatch,
@@ -94,8 +94,8 @@ export const Home = () => {
 				<button className='toggle-button' onClick={toggleAddSong}>
 					ADD SONG
 				</button>
-				{/*<AddSong onClose={toggleAddSong} show={isAddSongModalVisible} />*/}
-			</SongContext.Provider>
+				<AddSong onClose={toggleAddSong} show={isAddSongModalVisible} />
+			</SongContext.Provider>*/}
 			<div className='home'>
 				{state.isFetching ? (
 					<span className='loader'>LOADING...</span>
