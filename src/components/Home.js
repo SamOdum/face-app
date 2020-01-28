@@ -8,6 +8,7 @@ import React, {
 } from 'react';
 import { AuthContext } from '../App';
 import Login from './Login';
+import Brain from './Brain';
 // import Card from './Card';
 // import AddSong from './AddSong';
 
@@ -99,6 +100,7 @@ export const Home = () => {
 		<div className="home container">
 			<h1>Welcome home!</h1>
 			<p>Would you like to give FaceApp a whirl?</p>
+			<Brain />
 		</div>
 		
 	)
