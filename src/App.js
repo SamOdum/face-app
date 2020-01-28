@@ -16,14 +16,24 @@ const initialState = {
 
 const reducer = (state, action) => {
 	switch (action.type) {
-		case 'LOGIN':
-			localStorage.setItem('user', JSON.stringify(action.payload.user));
-			localStorage.setItem('token', JSON.stringify(action.payload.token));
+		case 'SIGNUP':
+			
+			localStorage.setItem('user', JSON.stringify(action.payload.data.user));
+			localStorage.setItem('token', JSON.stringify(action.payload.data.token));
 			return {
 				...state,
 				isAuthenticated: true,
-				user: action.payload.user,
-				token: action.payload.token,
+				user: action.payload.data.user,
+				token: action.payload.data.token,
+			};
+		case 'LOGIN':
+			localStorage.setItem('user', JSON.stringify(action.payload.data.user));
+			localStorage.setItem('token', JSON.stringify(action.payload.data.token));
+			return {
+				...state,
+				isAuthenticated: true,
+				user: action.payload.data.user,
+				token: action.payload.data.token,
 			};
 		case 'LOGOUT':
 			localStorage.clear();
@@ -67,8 +77,9 @@ function App() {
 			dispatch({
 				type: 'LOGIN',
 				payload: {
-					user,
-					token,
+					data:{user,
+					token,}
+					
 				},
 			});
 		}

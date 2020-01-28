@@ -7,6 +7,7 @@ import React, {
 	// useState,
 } from 'react';
 import { AuthContext } from '../App';
+import Login from './Login';
 // import Card from './Card';
 // import AddSong from './AddSong';
 
@@ -70,7 +71,6 @@ export const Home = () => {
 				}
 			})
 			.then(resJson => {
-				console.log(resJson);
 				dispatch({
 					type: 'FETCH_FACE_SUCCESS',
 					payload: resJson,
@@ -84,17 +84,24 @@ export const Home = () => {
 			});
 	}, [authState.token]);
 
+	// return (
+	// 	<div className='home'>
+	// 		{state.isFetching ? (
+	// 			<span className='loader'>LOADING...</span>
+	// 		) : state.hasError ? (
+	// 			<span className='error'>AN ERROR HAS OCCURED</span>
+	// 		) : (
+	// 			<h1>Welcome home</h1>
+	// 		)}
+	// 	</div>
+	// );
 	return (
-		<div className='home'>
-			{state.isFetching ? (
-				<span className='loader'>LOADING...</span>
-			) : state.hasError ? (
-				<span className='error'>AN ERROR HAS OCCURED</span>
-			) : (
-				<h1>Welcome home</h1>
-			)}
+		<div className="home container">
+			<h1>Welcome home!</h1>
+			<p>Would you like to give FaceApp a whirl?</p>
 		</div>
-	);
+		
+	)
 };
 
 export default Home;

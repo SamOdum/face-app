@@ -14,10 +14,10 @@ cloudinary.config({
 const Users = {
   query: {
     createUser: `INSERT INTO
-  users( email, password1, password2)
-  VALUES ($1, $2, $3) returning *`,
-    findUser: 'SELECT * FROM employees WHERE userid = $1',
-    deleteUser: 'DELETE FROM employees WHERE userid = $1 returning *',
+  users(email, password)
+  VALUES ($1, $2) returning *`,
+    findUser: 'SELECT * FROM users WHERE email = $1',
+    deleteUser: 'DELETE FROM users WHERE email = $1 returning *',
   },
 
   /**
@@ -27,18 +27,19 @@ const Users = {
    * @returns {object} User id and token
    */
   async create(req, res) {
+    console.log(req.body)
     const { password1, password2 } = req.body;
-    if(password1 !== password2 ) return res.status(400).send({ status: 'error', data: { message: 'passwords must match' } });
+    if(password1 !== password2 ) return res.status(400).json({ status: 'error', data: { message: 'passwords must match' } });
       
-    const passwordHash = Helper.hashPassword(req.body.password);
-    const values = [req.body.email, passwordHash];
+    const Hashedpassword = Helper.hashPassword(password1);
+    const values = [req.body.email, Hashedpassword];
 
     try {
       const { rows } = await db.query(Users.query.createUser, values);
-      const userId = rows[0].userid;
-      const token = Helper.generateToken(userId);
+      const user = rows[0].email;
+      const token = Helper.generateToken(user);
       return res.status(201).json({
-        status: 'success', data: { message: 'User account successfully created', token, userId },
+        status: 'success', data: { message: 'User account successfully created', token, user },
       });
     } catch (err) {
       return res.status(400).send({ status: 'error', error: { message: err } });
@@ -78,21 +79,20 @@ const Users = {
    * @returns {object} user id and authentification token
    */
   async login(req, res) {
-    const { email, password } = req.body;
-    if (!email || !password || (!Helper.isValidEmail(email))) {
+    const { email, password1 } = req.body;
+    if (!email || !password1 || (!Helper.isValidEmail(email))) {
       return res.status(400).send({ status: 'error', error: { message: 'Fill all fields and provide a valid email' } });
     }
-    const text = 'SELECT * FROM employees WHERE email = $1';
     try {
-      const { rows } = await db.query(text, [email]);
+      const { rows } = await db.query(Users.query.findUser, [email]);
       if (!rows[0]) {
         return res.status(400).send({ status: 'error', error: { message: 'The credentials you provided is incorrect' } });
       }
-      if (!Helper.comparePassword(rows[0].password, password)) {
+      if (!Helper.comparePassword(rows[0].password, password1)) {
         return res.status(400).send({ status: 'error', error: { message: 'The credentials you provided is incorrect' } });
       }
-      const token = Helper.generateToken(rows[0].userid);
-      return res.status(200).send({ status: 'success', data: { token, userId: rows[0].userid } });
+      const token = Helper.generateToken(rows[0].email);
+      return res.status(200).send({ status: 'success', data: { token, user: rows[0].email } });
     } catch (error) {
       return res.status(400).send({ status: 'error', error });
     }

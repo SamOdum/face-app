@@ -20,6 +20,10 @@ if (process.env.NODE_ENV === 'production') {
   pool = new Pool({ connectionString });
 }
 
+pool.on('connect', () => {
+  console.log('connected to the db');
+});
+
 const dbQuery = {
   query: async (text, params) => {
     const client = await pool.connect();

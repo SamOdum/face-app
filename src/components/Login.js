@@ -7,7 +7,8 @@ export const Login = () => {
 	const { dispatch } = useContext(AuthContext);
 	const initialState = {
 		email: '',
-		password: '',
+		password1: '',
+		password2: '',
 		isSubmitting: false,
 		errorMessage: null,
 	};
@@ -21,14 +22,14 @@ export const Login = () => {
 		});
 	};
 
-	const handleFormSubmit = event => {
+	const handleSignupFormSubmit = event => {
 		event.preventDefault();
 		setData({
 			...data,
 			isSubmitting: true,
 			errorMessage: null,
 		});
-		fetch('http://localhost:5000/api/v1/auth/sign-in/', {
+		fetch('http://localhost:5000/api/v1/auth/signup/', {
 			//**Remember to implement .env here */
 			method: 'post',
 			headers: {
@@ -36,7 +37,78 @@ export const Login = () => {
 			},
 			body: JSON.stringify({
 				email: data.email,
-				password: data.password,
+				password1: data.password1,
+				password2: data.password2,
+			}),
+		})
+			.then(res => {
+				if (res.ok) {
+					return res.json();
+				}
+				throw res;
+			})
+			.then(resJson => {
+				dispatch({
+					type: 'SIGNUP',
+					payload: resJson,
+				});
+			})
+			.catch(error => {
+				setData({
+					...data,
+					isSubmitting: false,
+					errorMessage: error.status===400? 'Passwords must match' : error.message || error.statusText,
+				});
+			});
+	};
+
+// 	const handleSignupFormSubmit = async event => {
+// 	event.preventDefault();
+// 	setData({
+// 		...data,
+// 		isSubmitting: true,
+// 		errorMessage: null,
+// 	});
+// 	const response = await fetch('http://localhost:5000/api/v1/auth/signup/', {
+// 		//**Remember to implement .env here */
+// 		method: 'post',
+// 		headers: {
+// 			'Content-Type': 'application/json',
+// 		},
+// 		body: JSON.stringify({
+// 			email: data.email,
+// 			password1: data.password1,
+// 			password2: data.password2,
+// 		}),
+// 	});
+// 	try{
+// if (response.status === 400) return response.json();
+// if (response.status === 201) {dispatch({type: 'SIGNUP', payload: response.json(),})}
+// 	}catch(error){
+// 				setData({
+// 					...data,
+// 					isSubmitting: false,
+// 					errorMessage: error.message || error.statusText,
+// 				});
+// 	}
+// }
+
+	const handleLoginFormSubmit = event => {
+		event.preventDefault();
+		setData({
+			...data,
+			isSubmitting: true,
+			errorMessage: null,
+		});
+		fetch('http://localhost:5000/api/v1/auth/login/', {
+			//**Remember to implement .env here */
+			method: 'post',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				email: data.email,
+				password1: data.password1,
 			}),
 		})
 			.then(res => {
@@ -55,7 +127,7 @@ export const Login = () => {
 				setData({
 					...data,
 					isSubmitting: false,
-					errorMessage: error.message || error.statusText,
+					errorMessage: error.status === 400? 'Fill all fields correctly' : error.message || error.statusText,
 				});
 			});
 	};
@@ -70,7 +142,7 @@ export const Login = () => {
 					</header>
 					<Switch>
 						<Route path='/login'>
-							<form onSubmit={handleFormSubmit}>
+							<form onSubmit={handleLoginFormSubmit}>
 								<label htmlFor='email'>
 									Email Address
 									<input
@@ -82,13 +154,13 @@ export const Login = () => {
 									/>
 								</label>
 
-								<label htmlFor='password'>
+								<label htmlFor='password1'>
 									Password
 									<input
 										type='password'
-										value={data.password}
+										value={data.password1}
 										onChange={handleInputChange}
-										name='password'
+										name='password1'
 										id='password'
 									/>
 								</label>
@@ -107,7 +179,7 @@ export const Login = () => {
 							</form>
 						</Route>
 						<Route path='/sign-up'>
-							<form onSubmit={handleFormSubmit}>
+							<form onSubmit={handleSignupFormSubmit}>
 								<label htmlFor='email'>
 									Email Address
 									<input
@@ -119,14 +191,25 @@ export const Login = () => {
 									/>
 								</label>
 
-								<label htmlFor='password'>
+								<label htmlFor='password1'>
 									Password
 									<input
 										type='password'
-										value={data.password}
+										value={data.password1}
 										onChange={handleInputChange}
-										name='password'
+										name='password1'
 										id='password'
+									/>
+								</label>
+
+								<label htmlFor='password2'>
+									Re-type Password
+									<input
+										type='password'
+										value={data.password2}
+										onChange={handleInputChange}
+										name='password2'
+										id='password2'
 									/>
 								</label>
 

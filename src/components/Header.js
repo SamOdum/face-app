@@ -3,21 +3,21 @@ import { AuthContext } from '../App';
 
 export const Header = () => {
 	const { state, dispatch } = useContext(AuthContext);
-	return (
-		<nav id='navigation'>
-			<h1 href='#' className='logo'>
-				Face/App
-			</h1>
-			<button
-				onClick={() =>
+	const handleClick = () =>
 					dispatch({
 						type: 'LOGOUT',
 					})
-				}>
-				{state.isAuthenticated && (
-					<h1 className='btn-txt'>Hi {state.user.email} (LOGOUT)</h1>
-				)}
-			</button>
+	return (
+		<nav id='navigation'>
+			<span className='logo'>
+				Face/App
+			</span>
+			{state.isAuthenticated 
+			&& <button
+				onClick={handleClick} className='btn-txt'>
+				Log out
+			</button>}
+			
 		</nav>
 	);
 };
