@@ -57,24 +57,25 @@ export const Brain = () => {
 			});
     };
     return (
+        <div>
 <form onSubmit={handleFormSubmit}>
-								<label htmlFor='email'>
-									Email Address
+								<div>
 									<input
 										type='text'
 										value={data.url}
 										onChange={handleInputChange}
 										name='url'
-										id='url'
+                                        id='url'
+                                        placeholder='Enter image url here...'
 									/>
-                                </label>
+                                
                                 <button disabled={data.isSubmitting}>
 									{data.isSubmitting ? (
 										<img className='spinner' src={logo} alt='loading icon' />
 									) : (
 										"Let's go!"
 									)}
-								</button>
-                                </form>)}
+								</button></div>
+                                </form><div><img src={data.url} alt="loaded image"/></div></div>)}
 
                                 export default Brain
