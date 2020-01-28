@@ -269,7 +269,7 @@ label {
 	margin-right: 5%; // Must be same with .login-container
 	display: flex;
 	flex-flow: column nowrap;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	height: 80vh;
 	background-color: orange;
@@ -305,7 +305,6 @@ label {
 	@media screen and (min-width: 1400px) {
 		margin: auto;
 		width: 1400px;
-		justify-content: flex-start;
 	}
 
 	&.loader {
