@@ -57,8 +57,8 @@ export const Brain = () => {
 			});
     };
     return (
-        <div>
-<form onSubmit={handleFormSubmit} className='brain-form'>
+        <div className='brain-container'>
+<form onSubmit={handleFormSubmit} className='form'>
 									<input
 										type='text'
 										value={data.url}

@@ -305,6 +305,7 @@ label {
 	@media screen and (min-width: 1400px) {
 		margin: auto;
 		width: 1400px;
+		justify-content: flex-start;
 	}
 
 	&.loader {
@@ -377,16 +378,40 @@ label {
 	font-size: 2rem;
 }
 
-.brain-form {
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-around;
-	align-items: stretch;
+.brain-container {
+	width: 60%;
+	@media screen and (max-width: 780px) {
+		width: 80%;
+	}
 
-	& input,
-	button {
-		padding-right: 1%;
-		padding-left: 1%;
+	& .form {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: center;
+		align-items: stretch;
+
+		& input,
+		button {
+			padding-right: 2%;
+			padding-left: 2%;
+		}
+
+		& input {
+			width: 70%;
+
+			@media screen and (max-width: 360px) {
+				width: 100%;
+				// height: auto;
+			}
+		}
+		& button {
+			width: 25%;
+
+			@media screen and (max-width: 360px) {
+				width: 100%;
+				height: 40px;
+			}
+		}
 	}
 }
 /*	*****  HOME PAGE  ******/
