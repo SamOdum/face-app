@@ -58,8 +58,7 @@ export const Brain = () => {
     };
     return (
         <div>
-<form onSubmit={handleFormSubmit}>
-								<div>
+<form onSubmit={handleFormSubmit} className='brain-form'>
 									<input
 										type='text'
 										value={data.url}
@@ -75,7 +74,7 @@ export const Brain = () => {
 									) : (
 										"Let's go!"
 									)}
-								</button></div>
+								</button>
                                 </form><div><img src={data.url} alt="loaded image"/></div></div>)}
 
                                 export default Brain
