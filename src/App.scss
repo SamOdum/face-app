@@ -272,7 +272,7 @@ label {
 	justify-content: flex-start;
 	align-items: center;
 	height: 80vh;
-	background-color: orange;
+	// background-color: orange;
 }
 
 .toggle-button {
@@ -405,6 +405,9 @@ label {
 		}
 		& button {
 			width: 25%;
+			border: none;
+			background-color: $accent-A;
+			color: $pri-text-color;
 
 			@media screen and (max-width: 360px) {
 				width: 100%;
