@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import logo from '../logo.svg';
 import { AuthContext } from '../App';
 
@@ -55,7 +55,24 @@ export const Brain = () => {
 					errorMessage: error.status === 400? 'Fill all fields correctly' : error.message || error.statusText,
 				});
 			});
-    };
+	};
+	
+	// Face bounding box
+let faceBoxStyle;
+useEffect(()=>{
+		const faceBox = {
+		position: "absolute",
+		left: "20px",
+		top: "20px",
+		/* background-color: red, */
+		zIndex: "10",
+		width: "50px",
+		height: "50px",
+		border: "2px solid white",
+	}
+
+	faceBoxStyle = data.url ? faceBox : '';
+}, [])
     return (
         <div className='brain-container'>
 <form onSubmit={handleFormSubmit} className='form'>
@@ -75,6 +92,6 @@ export const Brain = () => {
 										"Let's go!"
 									)}
 								</button>
-                                </form><div><img src={data.url} alt="loaded image"/></div></div>)}
+                                </form><div className='brain-image-container'><div style={{faceBoxStyle}}></div><img src={data.url} alt=""/></div></div>)}
 
                                 export default Brain
