@@ -383,11 +383,21 @@ label {
 		flex-flow: row wrap;
 		justify-content: center;
 		align-items: stretch;
+		margin-bottom: 3%;
+
+		@media screen and (max-width: 360px) {
+			margin-bottom: 5%;
+		}
 
 		& input,
 		button {
 			padding-right: 2%;
 			padding-left: 2%;
+			margin-top: 3%;
+
+			@media screen and (max-width: 360px) {
+				margin-top: 5%;
+			}
 		}
 
 		& input {
