@@ -14,8 +14,8 @@ cloudinary.config({
 const Users = {
   query: {
     createUser: `INSERT INTO
-  users(email, password)
-  VALUES ($1, $2) returning *`,
+  users( name, email, password)
+  VALUES ($1, $2, $3) returning *`,
     findUser: 'SELECT * FROM users WHERE email = $1',
     deleteUser: 'DELETE FROM users WHERE email = $1 returning *',
   },
@@ -32,11 +32,11 @@ const Users = {
     if(password1 !== password2 ) return res.status(400).json({ status: 'error', data: { message: 'passwords must match' } });
       
     const Hashedpassword = Helper.hashPassword(password1);
-    const values = [req.body.email, Hashedpassword];
+    const values = [req.body.name, req.body.email, Hashedpassword ];
 
     try {
       const { rows } = await db.query(Users.query.createUser, values);
-      const user = rows[0].email;
+      const user = rows[0].name;
       const token = Helper.generateToken(user);
       return res.status(201).json({
         status: 'success', data: { message: 'User account successfully created', token, user },
@@ -91,8 +91,8 @@ const Users = {
       if (!Helper.comparePassword(rows[0].password, password1)) {
         return res.status(400).send({ status: 'error', error: { message: 'The credentials you provided is incorrect' } });
       }
-      const token = Helper.generateToken(rows[0].email);
-      return res.status(200).send({ status: 'success', data: { token, user: rows[0].email } });
+      const token = Helper.generateToken(rows[0].name);
+      return res.status(200).send({ status: 'success', data: { token, user: rows[0].name } });
     } catch (error) {
       return res.status(400).send({ status: 'error', error });
     }

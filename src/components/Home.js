@@ -98,7 +98,7 @@ export const Home = () => {
 	// );
 	return (
 		<div className="home container">
-			<h1>Welcome home!</h1>
+			<h1>Welcome {authState.user}</h1>
 			<p>Would you like to give FaceApp a whirl?</p>
 			<Brain />
 		</div>

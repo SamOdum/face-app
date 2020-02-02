@@ -427,7 +427,15 @@ label {
 		position: relative;
 
 		img {
-			width: 100%;
+			max-width: 100%;
+			margin-right: auto;
+			margin-left: auto;
+			display: block;
+
+			@media screen and (max-height: 400px) {
+				max-width: 100%;
+				max-height: 200px;
+			}
 		}
 	}
 }

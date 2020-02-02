@@ -6,6 +6,7 @@ import { AuthContext } from '../App';
 export const Login = () => {
 	const { dispatch } = useContext(AuthContext);
 	const initialState = {
+		name: '',
 		email: '',
 		password1: '',
 		password2: '',
@@ -36,6 +37,7 @@ export const Login = () => {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
+				name: data.name,
 				email: data.email,
 				password1: data.password1,
 				password2: data.password2,
@@ -180,6 +182,16 @@ export const Login = () => {
 						</Route>
 						<Route path='/sign-up'>
 							<form onSubmit={handleSignupFormSubmit}>
+							<label htmlFor='name'>
+									First name
+									<input
+										type='text'
+										value={data.name}
+										onChange={handleInputChange}
+										name='name'
+										id='name'
+									/>
+								</label>
 								<label htmlFor='email'>
 									Email Address
 									<input
