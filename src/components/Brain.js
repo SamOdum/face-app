@@ -1,17 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Clarifai from 'clarifai';
-import dotenv from 'dotenv';
 import logo from '../logo.svg';
-import { AuthContext } from '../App';
+import dotenv from 'dotenv';
+import clarifaiApiKey from '../config';
 
 dotenv.config();
-
 const app = new Clarifai.App({
-	apiKey: `d16ebb66b3bd4faa929048ce85fb4b7e`
+	apiKey: clarifaiApiKey,
 });
 
 export const Brain = () => {
-	const { dispatch } = useContext(AuthContext);
 	const initialState = {
 		url: '',
 		isSubmitting: false,
@@ -40,14 +38,13 @@ export const Brain = () => {
 		});
 	};
 
-	
     const handleFormSubmit = event => {
 		event.preventDefault();
+		setData({...data, isSubmitting: true,});
 	app.models.predict("a403429f2ddf4b49b307e318f00e528b", data.url).then(
     (response) => {
 	  // do something with response
 	  const concepts = response['outputs'][0]['data']['regions'][0]['region_info']['bounding_box'];
-		console.log(concepts);
 		const img = document.querySelector('#brain-image');
 		const width = Number(img.width);
 		const height = Number(img.height);
@@ -60,8 +57,16 @@ export const Brain = () => {
 			right: `${width - (concepts.right_col * width)}px`,
 			
 		});
-    }
-  ).catch(err=>console.log(err))	
+		setData({...data, isSubmitting: false,});
+
+	})
+	.catch(err=>{
+	  setData({
+			...data,
+			isSubmitting: false,
+			errorMessage: err.message || err.statusText,
+		});
+	})	
 	} 
 
     return (
@@ -81,7 +86,7 @@ export const Brain = () => {
 			
 				<button disabled={data.isSubmitting}>
 					{data.isSubmitting ? (
-						<img className='spinner' src={logo} alt='loading icon' />
+						<span className='spinner2' src={logo} alt='loading icon' >o</span>
 					) : (
 						"Let's go!"
 					)}
@@ -93,6 +98,6 @@ export const Brain = () => {
 			</div>
 		</div>
 	)
-		}
+}
 
 export default Brain

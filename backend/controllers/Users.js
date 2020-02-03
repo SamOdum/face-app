@@ -27,7 +27,6 @@ const Users = {
    * @returns {object} User id and token
    */
   async create(req, res) {
-    console.log(req.body)
     const { password1, password2 } = req.body;
     if(password1 !== password2 ) return res.status(400).json({ status: 'error', data: { message: 'passwords must match' } });
       
@@ -79,7 +78,6 @@ const Users = {
    * @returns {object} user id and authentification token
    */
   async login(req, res) {
-    console.log(req.body)
     const { email, password1 } = req.body;
     if (!email || !password1 || (!Helper.isValidEmail(email))) {
       return res.status(400).send({ status: 'error', error: { message: 'Fill all fields and provide a valid email' } });

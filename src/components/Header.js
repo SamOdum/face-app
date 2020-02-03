@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../App';
 
 export const Header = () => {
@@ -10,7 +11,10 @@ export const Header = () => {
 	return (
 		<nav id='navigation'>
 			<span className='logo'>
+				<Link to='/'
+				onClick={handleClick}>
 				Face/App
+				</Link> 
 			</span>
 			{state.isAuthenticated 
 			&& <button

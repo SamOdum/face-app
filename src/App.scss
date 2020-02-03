@@ -190,6 +190,22 @@ label {
 	}
 }
 
+.spinner2 {
+	width: 20px;
+	height: 10px;
+	margin-right: auto;
+	margin-left: auto;
+	display: block;
+	background-color: $accent-B;
+	color: $accent-B;
+	animation: spinner infinite 0.9s linear;
+	height: 90%;
+
+	&:focus {
+		border: none;
+	}
+}
+
 @keyframes spinner {
 	from {
 		transform: rotate(0deg);
@@ -227,12 +243,16 @@ label {
 	& .logo {
 		color: $pri-text-color;
 		margin-left: 5%;
+		font-weight: 600;
+		font-size: 140%;
 	}
 
 	& button {
 		background-color: transparent;
 		border: none;
 		margin-right: 5%;
+		color: $pri-text-color;
+		font-weight: 800;
 
 		&:hover {
 			cursor: pointer;

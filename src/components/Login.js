@@ -64,37 +64,6 @@ export const Login = () => {
 			});
 	};
 
-// 	const handleSignupFormSubmit = async event => {
-// 	event.preventDefault();
-// 	setData({
-// 		...data,
-// 		isSubmitting: true,
-// 		errorMessage: null,
-// 	});
-// 	const response = await fetch('http://localhost:5000/api/v1/auth/signup/', {
-// 		//**Remember to implement .env here */
-// 		method: 'post',
-// 		headers: {
-// 			'Content-Type': 'application/json',
-// 		},
-// 		body: JSON.stringify({
-// 			email: data.email,
-// 			password1: data.password1,
-// 			password2: data.password2,
-// 		}),
-// 	});
-// 	try{
-// if (response.status === 400) return response.json();
-// if (response.status === 201) {dispatch({type: 'SIGNUP', payload: response.json(),})}
-// 	}catch(error){
-// 				setData({
-// 					...data,
-// 					isSubmitting: false,
-// 					errorMessage: error.message || error.statusText,
-// 				});
-// 	}
-// }
-
 	const handleLoginFormSubmit = event => {
 		event.preventDefault();
 		setData({
