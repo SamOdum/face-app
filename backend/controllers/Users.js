@@ -79,6 +79,7 @@ const Users = {
    * @returns {object} user id and authentification token
    */
   async login(req, res) {
+    console.log(req.body)
     const { email, password1 } = req.body;
     if (!email || !password1 || (!Helper.isValidEmail(email))) {
       return res.status(400).send({ status: 'error', error: { message: 'Fill all fields and provide a valid email' } });
