@@ -12,7 +12,7 @@ export const Home = () => {
 	return (
 		<div className="home container">
 			<h1>Welcome {authState.user}</h1>
-			<p>Would you like to give FaceApp a whirl?</p>
+			<p>Input the url of a picture and click Let's Go!.</p>
 			<Brain />
 		</div>
 		

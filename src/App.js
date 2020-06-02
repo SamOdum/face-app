@@ -17,7 +17,6 @@ const initialState = {
 const reducer = (state, action) => {
 	switch (action.type) {
 		case 'SIGNUP':
-			
 			localStorage.setItem('user', JSON.stringify(action.payload.data.user));
 			localStorage.setItem('token', JSON.stringify(action.payload.data.token));
 			return {

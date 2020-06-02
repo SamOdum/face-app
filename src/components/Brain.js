@@ -39,6 +39,7 @@ export const Brain = () => {
 	};
 
     const handleFormSubmit = event => {
+		//https://scontent-los2-1.xx.fbcdn.net/v/t1.0-0/p640x640/80970851_114934163347840_5664493068020088832_o.jpg?_nc_cat=109&_nc_oc=AQm_TcCa9LkjqsV3UtSndIc4EGyhrOMjSve-oUAf6yNN90GxHVwdap7zDWBPPPeB1J4&_nc_ht=scontent-los2-1.xx&_nc_tp=6&oh=29d790e02a879656841f24fd66d4c138&oe=5EB88686
 		event.preventDefault();
 		setData({...data, isSubmitting: true,});
 	app.models.predict("a403429f2ddf4b49b307e318f00e528b", data.url).then(

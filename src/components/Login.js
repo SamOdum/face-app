@@ -105,6 +105,12 @@ export const Login = () => {
 
 	return (
 		<div className='login-container'>
+			<div className="index-text">
+				<h2>Hi there!</h2>
+				<p>How about we play with pictures, ya?</p>
+				<p>Give me any picture and I will show you if it has a face in it.</p>
+				<p>Give it a try! <span className='smiley'>&#128515;</span></p>
+			</div>
 			<div className='card'>
 				<div className='container'>
 					<header>
@@ -210,6 +216,7 @@ export const Login = () => {
 					</Switch>
 				</div>
 			</div>
+		
 		</div>
 	);
 };
