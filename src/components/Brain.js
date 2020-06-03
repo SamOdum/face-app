@@ -4,7 +4,7 @@ import logo from '../logo.svg';
 import clarifaiApiKey from '../config';
 
 const app = new Clarifai.App({
-	apiKey: clarifaiApiKey || process.env.CLARIFAI_KEY,
+	apiKey: clarifaiApiKey,
 });
 
 export const Brain = () => {
