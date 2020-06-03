@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { NavLink, Switch, Route } from 'react-router-dom';
 import logo from '../logo.svg';
 import { AuthContext } from '../App';
+import { logInApi, signUpApi } from '../config'
 
 export const Login = () => {
 	const { dispatch } = useContext(AuthContext);
@@ -30,7 +31,7 @@ export const Login = () => {
 			isSubmitting: true,
 			errorMessage: null,
 		});
-		fetch('http://localhost:5000/api/v1/auth/signup/', {
+		fetch(signUpApi, {
 			//**Remember to implement .env here */
 			method: 'post',
 			headers: {
@@ -71,7 +72,7 @@ export const Login = () => {
 			isSubmitting: true,
 			errorMessage: null,
 		});
-		fetch('http://localhost:5000/api/v1/auth/login/', {
+		fetch(logInApi, {
 			//**Remember to implement .env here */
 			method: 'post',
 			headers: {
@@ -109,7 +110,7 @@ export const Login = () => {
 				<h2>Hi there!</h2>
 				<p>How about we play with pictures, ya?</p>
 				<p>Give me any picture and I will show you if it has a face in it.</p>
-				<p>Give it a try! <span className='smiley'>&#128515;</span></p>
+				<p>Give it a try! <span className='smiley' role='img' aria-label='smiling face'>&#128515;</span></p>
 			</div>
 			<div className='card'>
 				<div className='container'>

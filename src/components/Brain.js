@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import Clarifai from 'clarifai';
 import logo from '../logo.svg';
-import dotenv from 'dotenv';
 import clarifaiApiKey from '../config';
 
-dotenv.config();
 const app = new Clarifai.App({
-	apiKey: clarifaiApiKey,
+	apiKey: clarifaiApiKey || process.env.CLARIFAI_KEY,
 });
 
 export const Brain = () => {
