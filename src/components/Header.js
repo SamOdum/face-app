@@ -17,10 +17,10 @@ export const Header = () => {
 				</Link> 
 			</span>
 			{state.isAuthenticated 
-			&& <button
+			&& (<button
 				onClick={handleClick} className='btn-txt'>
 				Log out
-			</button>}
+			</button>)}
 			
 		</nav>
 	);

@@ -275,6 +275,7 @@ label {
 		margin-right: 5%;
 		color: $pri-text-color;
 		font-weight: 800;
+		font-size: 100%;
 
 		&:hover {
 			cursor: pointer;
@@ -475,7 +476,7 @@ label {
 	// }
 
 	& .brain-image-container {
-		width: 100%;
+		// width: 100%;
 		position: relative;
 
 		img {

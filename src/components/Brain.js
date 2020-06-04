@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Clarifai from 'clarifai';
 import logo from '../logo.svg';
 import clarifaiApiKey from '../config';
@@ -27,9 +27,12 @@ export const Brain = () => {
 	};
 
 	const [data, setData] = useState(initialState);
-	const [coord, setCoord] = useState(faceBox)
+	const [coord, setCoord] = useState(faceBox);
 
-	const handleInputChange = event => {
+	useEffect(()=>{setCoord(faceBox)}, [data.url, data.errorMessage]);
+	useEffect(()=>{setData({...data, errorMessage: null})}, [data.url]);
+	
+const handleInputChange = event => {
 		setData({
 			...data,
 			[event.target.name]: event.target.value,
@@ -44,7 +47,7 @@ export const Brain = () => {
     (response) => {
 	  // do something with response
 	  const concepts = response['outputs'][0]['data']['regions'][0]['region_info']['bounding_box'];
-		const img = document.querySelector('#brain-image');
+	  const img = document.querySelector('#brain-image');
 		const width = Number(img.width);
 		const height = Number(img.height);
 		setCoord({
@@ -56,7 +59,7 @@ export const Brain = () => {
 			right: `${width - (concepts.right_col * width)}px`,
 			
 		});
-		setData({...data, isSubmitting: false,});
+		setData({...data, isSubmitting: false, errorMessage: null,});
 
 	})
 	.catch(err=>{
@@ -90,6 +93,7 @@ export const Brain = () => {
 						"Let's go!"
 					)}
 				</button>
+				{data.errorMessage && <div style={{marginTop: '1em'}}>{data.errorMessage}</div>}
 			</form>
 			<div className='brain-image-container'>
 				<div style={coord}></div>
